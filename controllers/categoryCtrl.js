@@ -32,7 +32,7 @@ const categoryCtrl ={
     updateCategory:async(req, res) =>{
         try{
             const {name,category_id}=req.body
-            await Category.findOneAndUpdate({id:req.params.id},{name,category_id})
+            await Category.findOneAndUpdate({_id:req.params.id},{name,category_id})
             res.json({msg:"Updated a category"})
         }catch(err){
             return res.status(500).json({msg:err.message})

@@ -14,7 +14,7 @@ const collectionSchema = new mongoose.Schema({
         unique:true
     },
     description:{
-        type:String,
+        type:String
     },
     category:{
         type:Array,
@@ -27,5 +27,7 @@ const collectionSchema = new mongoose.Schema({
 },{
     timestamps:true
 })
+
+
 
 module.exports = mongoose.model("Collections", collectionSchema)

@@ -1,5 +1,7 @@
 const Collections = require('../models/collectionModel')
 
+
+
 const collectionCtrl ={
     getCollections: async(req, res) => {
         try{
@@ -14,7 +16,7 @@ const collectionCtrl ={
             const {collection_id, name,image_url,category,description} = req.body
             const collection = await Collections.findOne({name})
             if(collection) return res.status(400).json({msg:"This collection already exists."})
-            const newCollections = new Collections({collection_id, name,image_url,category, description})
+            const newCollections = new Collections({collection_id, name,image_url,category,description })
             await newCollections.save()
             res.json({msg:"created a collection"})
         }catch(err){
@@ -32,7 +34,9 @@ const collectionCtrl ={
     updateCollection:async(req, res) =>{
         try{
             const {collection_id, name,image_url,category, description}=req.body
-            await Collections.findOneAndUpdate({id:req.params.id},{collection_id, name,image_url,category, description})
+            await Collections.findOneAndUpdate({_id:req.params.id},{collection_id, name,image_url,category, description},{
+                new: true
+              })
             res.json({msg:"Updated a collection"})
         }catch(err){
             return res.status(500).json({msg:err.message})
