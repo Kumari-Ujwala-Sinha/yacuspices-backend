@@ -4,7 +4,11 @@ const productCtrl ={
     getProducts: async(req, res) => {
         try{  
             const products = await Products.find()
-            res.json(products)
+            res.json({
+                status: 'success',
+                result: products.length,
+                products: products
+            })
         }catch(err){
             return res.status(500).json({msg:err.message})
         }
